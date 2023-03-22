@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  s-pacs:
+    image: 'i-pacs'
+    init: true
+    build:
+      context: .
+      args:
+        APP_NAME: pacs
+      dockerfile: .deploy/base.Dockerfile
+    container_name: c-pacs
+    environment:
+      - PORT=$PORT
+    ports:
+      - $PORT:$PORT
+    networks:
+      - intranet
+
+networks:
+  intranet:
+    driver: bridge
